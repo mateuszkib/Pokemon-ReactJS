@@ -9,9 +9,9 @@ const PokemonItem = ({ pokemon }) => {
                 <img src={pokemon.imageUrl} alt={pokemon.name} />
             </div>
             <div className={styles.cardInfo}>
-                <p>{pokemon.supertype}</p>
-                <p>{pokemon.subtype}</p>
-                <p>{pokemon.rarity}</p>
+                <p>Supertype: {pokemon.supertype}</p>
+                <p>Subtype: {pokemon.subtype}</p>
+                <p>Rarity: {pokemon.rarity}</p>
             </div>
         </div>
     );

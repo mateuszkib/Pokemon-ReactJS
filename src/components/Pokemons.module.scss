@@ -1,0 +1,24 @@
+.wrapper {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+    margin: 2rem 0;
+}
+
+.button {
+    text-align: center;
+
+    button {
+        padding: 20px 50px;
+        border: none;
+        background-color: rgba(233, 129, 10, 0.815);
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

@@ -10,27 +10,37 @@ const Pokemons = () => {
 
     useEffect(() => {
         getPokemons();
-    }, []);
+    }, [page]);
 
     const getPokemons = async () => {
-        await fetch(`${API_URL}?page=${page}&pageSize=${pageSize}`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                setPokemons(data.cards);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        let data = await fetch(`${API_URL}?page=${page}&pageSize=${pageSize}`);
+        let result = await data.json();
+        let { cards } = result;
+
+        if (page === 1) {
+            setPokemons(cards);
+        } else {
+            setPokemons([...pokemons, ...cards]);
+        }
+
+        return result;
+    };
+
+    const loadMore = () => {
+        setPage((prevPage) => prevPage + 1);
     };
 
     return (
-        <div className={styles.wrapper}>
-            {pokemons.map((pokemon) => (
-                <PokemonItem key={pokemon.id} pokemon={pokemon} />
-            ))}
-        </div>
+        <>
+            <div className={styles.wrapper}>
+                {pokemons.map((pokemon) => (
+                    <PokemonItem key={pokemon.id} pokemon={pokemon} />
+                ))}
+            </div>
+            <div className={styles.button}>
+                <button onClick={loadMore}>Load More</button>
+            </div>
+        </>
     );
 };
 
